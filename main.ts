@@ -1,7 +1,7 @@
 // https://www.youtube.com/watch?v=CaD89i2Naoc
 // https://www.firialabs.com/blogs/lab-notes/the-joy-of-python-connecting-a-joystick-to-the-micro-bit
 
-const segment_size = 1024 / 5;
+const segmentSize = 1024 / 5;
 
 function Main () {
     radio.setGroup(252); // Групповой айди для общения джойстика и робота
@@ -14,11 +14,11 @@ function Main () {
         let j2Btn = pins.digitalReadPin(DigitalPin.P3); // Нажатие джойстика 2
         radio.sendValue("j1ValX", j1ValX); // Передать X джойстика 1
         radio.sendValue("j1ValY", j1ValY); // Передать Y джойстика 1
-        radio.sendValue("j2ValX", j1ValX); // Передать X джойстика 1
-        radio.sendValue("jBtnL", j1Btn); // Передать состоянии о нажатии левого джойстика
-        radio.sendValue("jBtnR", j2Btn); // Передать состоянии о нажатии левого джойстика
+        radio.sendValue("j2ValX", j1ValX); // Передать X джойстика 2
+        radio.sendValue("jBtnL", j1Btn); // Передать состоянии о кнопке левого джойстика
+        radio.sendValue("jBtnR", j2Btn); // Передать состоянии о кнопке левого джойстика
         // Вывод на экран направления
-        let col = j1ValX / segment_size, row = j1ValY / segment_size;
+        let col = j1ValX / segmentSize, row = j1ValY / segmentSize;
         led.plot(col, row); // Вывод на матрицу направления
         basic.pause(10); // Задержка цикла
     }
