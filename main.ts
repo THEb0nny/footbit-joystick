@@ -7,11 +7,11 @@ function Main () {
     radio.setGroup(252); // Групповой айди для общения джойстика и робота
     while (true) {
         basic.clearScreen(); // Очистить экран
-        let j1ValX = pins.analogReadPin(AnalogPin.P0); // Считать VRX джойстика 1
-        let j1ValY = pins.analogReadPin(AnalogPin.P1); // Считать VRY джойстика 1
-        let j2ValX = pins.analogReadPin(AnalogPin.P4); // Считать X  джойстика 2, который отвечает за Yaw - рысканье робота
-        let j1Btn = pins.digitalReadPin(DigitalPin.P2); // Нажатие джойстика 1
-        let j2Btn = pins.digitalReadPin(DigitalPin.P3); // Нажатие джойстика 2
+        let j1ValX = pins.analogReadPin(AnalogPin.P1); // Считать VRX джойстика 1
+        let j1ValY = Math.map(pins.analogReadPin(AnalogPin.P0), 0, 1023, 1023, 0); // Считать VRY джойстика 1
+        let j2ValX = pins.analogReadPin(AnalogPin.P2); // Считать X  джойстика 2, который отвечает за Yaw - рысканье робота
+        let j1Btn = pins.digitalReadPin(DigitalPin.P8); // Нажатие джойстика 1
+        let j2Btn = pins.digitalReadPin(DigitalPin.P13); // Нажатие джойстика 2
         radio.sendValue("j1ValX", j1ValX); // Передать X джойстика 1
         radio.sendValue("j1ValY", j1ValY); // Передать Y джойстика 1
         radio.sendValue("j2ValX", j1ValX); // Передать X джойстика 2
