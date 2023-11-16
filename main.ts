@@ -19,10 +19,12 @@ function Main () {
         radio.sendValue("jBtnR", j2Btn); // Передать состоянии о кнопке левого джойстика
         // Вывод на экран направления
         let col = j1ValX / segmentSize, row = j1ValY / segmentSize;
-        led.unplot(oldCol, oldRow); // Выключить старый светодиод
-        led.plot(col, row); // Вывод на матрицу направления
-        oldCol = col; // Переписываем старое положение по столбцу
-        oldRow = row; // Переписываем старое положение по строке
+        if (col != oldCol || row != oldRow) { // Если новые значения не совпадают со старыми
+            led.unplot(oldCol, oldRow); // Выключить старый светодиод
+            led.plot(col, row); // Включить светодиод на матрице
+            oldCol = col; // Переписываем старое положение по столбцу
+            oldRow = row; // Переписываем старое положение по строке
+        }
         basic.pause(10); // Задержка цикла
     }
 }
