@@ -2,11 +2,11 @@
 // https://www.firialabs.com/blogs/lab-notes/the-joy-of-python-connecting-a-joystick-to-the-micro-bit
 
 const segmentSize = 1024 / 5;
+let oldCol = 0, oldRow = 0;
 
 function Main () {
     radio.setGroup(252); // Групповой айди для общения джойстика и робота
     while (true) {
-        basic.clearScreen(); // Очистить экран
         let j1ValX = pins.analogReadPin(AnalogPin.P1); // Считать VRX джойстика 1
         let j1ValY = Math.map(pins.analogReadPin(AnalogPin.P0), 0, 1023, 1023, 0); // Считать VRY джойстика 1
         let j2ValX = pins.analogReadPin(AnalogPin.P2); // Считать X  джойстика 2, который отвечает за Yaw - рысканье робота
@@ -19,7 +19,10 @@ function Main () {
         radio.sendValue("jBtnR", j2Btn); // Передать состоянии о кнопке левого джойстика
         // Вывод на экран направления
         let col = j1ValX / segmentSize, row = j1ValY / segmentSize;
+        led.unplot(oldCol, oldRow); // Выключить старый светодиод
         led.plot(col, row); // Вывод на матрицу направления
+        oldCol = col;
+        oldRow = row;
         basic.pause(10); // Задержка цикла
     }
 }
