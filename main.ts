@@ -2,7 +2,7 @@
 // https://www.firialabs.com/blogs/lab-notes/the-joy-of-python-connecting-a-joystick-to-the-micro-bit
 
 const segmentSize = 1024 / 5;
-let oldCol = 0, oldRow = 0;
+let oldCol = 0, oldRow = 0; // Переменная для хранения позиции старого светодиода
 
 function Main () {
     radio.setGroup(252); // Групповой айди для общения джойстика и робота
@@ -21,8 +21,8 @@ function Main () {
         let col = j1ValX / segmentSize, row = j1ValY / segmentSize;
         led.unplot(oldCol, oldRow); // Выключить старый светодиод
         led.plot(col, row); // Вывод на матрицу направления
-        oldCol = col;
-        oldRow = row;
+        oldCol = col; // Переписываем старое положение по столбцу
+        oldRow = row; // Переписываем старое положение по строке
         basic.pause(10); // Задержка цикла
     }
 }
